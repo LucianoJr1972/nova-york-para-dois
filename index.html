@@ -1,0 +1,617 @@
+<title>Nova York para Dois</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<style>
+  :root {
+    --ground: #EFF1F3;
+    --surface: #FFFFFF;
+    --surface-2: #F6F7F9;
+    --ink: #16181D;
+    --ink-2: #454C57;
+    --ink-3: #6E7683;
+    --rule: #DCE0E5;
+    --rule-strong: #C3C9D1;
+    --link: #0039A6;
+    --free: #157347;
+    --free-bg: #E4F1E9;
+
+    --d1: #FCCC0A; --d1-ink: #16181D;
+    --d2: #00933C; --d2-ink: #FFFFFF;
+    --d3: #0039A6; --d3-ink: #FFFFFF;
+    --d4: #EE352E; --d4-ink: #FFFFFF;
+
+    --shadow: 0 1px 2px rgba(22,24,29,.05), 0 8px 24px -12px rgba(22,24,29,.16);
+    --maxw: 68rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0E1014;
+      --surface: #171A20;
+      --surface-2: #1E222A;
+      --ink: #E7EAEE;
+      --ink-2: #AEB6C2;
+      --ink-3: #838C9A;
+      --rule: #2A2F39;
+      --rule-strong: #3A414E;
+      --link: #6E9BF0;
+      --free: #4ECB84;
+      --free-bg: #17301F;
+
+      --d1: #FCCC0A; --d1-ink: #16181D;
+      --d2: #21B45E; --d2-ink: #08170D;
+      --d3: #5A87E8; --d3-ink: #071230;
+      --d4: #F4635C; --d4-ink: #2A0806;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0E1014;
+    --surface: #171A20;
+    --surface-2: #1E222A;
+    --ink: #E7EAEE;
+    --ink-2: #AEB6C2;
+    --ink-3: #838C9A;
+    --rule: #2A2F39;
+    --rule-strong: #3A414E;
+    --link: #6E9BF0;
+    --free: #4ECB84;
+    --free-bg: #17301F;
+
+    --d1: #FCCC0A; --d1-ink: #16181D;
+    --d2: #21B45E; --d2-ink: #08170D;
+    --d3: #5A87E8; --d3-ink: #071230;
+    --d4: #F4635C; --d4-ink: #2A0806;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: .6rem 1.25rem;
+    display: flex; align-items: center; gap: .5rem;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-label {
+    font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); white-space: nowrap; margin-right: .35rem;
+  }
+  .bullet {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; border-radius: 50%;
+    font-weight: 700; font-size: .95rem; line-height: 1;
+    text-decoration: none; flex: none;
+    transition: transform .15s ease;
+  }
+  .bullet:hover { transform: scale(1.08); }
+  .b1 { background: var(--d1); color: var(--d1-ink); }
+  .b2 { background: var(--d2); color: var(--d2-ink); }
+  .b3 { background: var(--d3); color: var(--d3-ink); }
+  .b4 { background: var(--d4); color: var(--d4-ink); }
+  .nav-sep { width: 1px; height: 1.4rem; background: var(--rule-strong); margin: 0 .5rem; flex: none; }
+  .nav-link {
+    font-size: .82rem; font-weight: 500; color: var(--ink-2); text-decoration: none;
+    white-space: nowrap; padding: .3rem .55rem; border-radius: 5px;
+  }
+  .nav-link:hover { color: var(--ink); background: var(--surface-2); }
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--link); outline-offset: 2px; border-radius: 4px;
+  }
+
+  /* ---------- header ---------- */
+  header.hero { padding: 3rem 0 2.25rem; }
+  .eyebrow {
+    font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 .9rem;
+  }
+  h1 {
+    font-size: clamp(2.3rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -.03em;
+    line-height: 1.02; margin: 0 0 1rem; text-wrap: balance;
+  }
+  .standfirst {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.14rem; line-height: 1.6; color: var(--ink-2);
+    max-width: 40rem; margin: 0 0 2rem;
+  }
+  .facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
+  }
+  .fact { background: var(--surface); padding: .95rem 1.1rem; }
+  .fact dt {
+    font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 .3rem;
+  }
+  .fact dd {
+    margin: 0; font-size: 1.32rem; font-weight: 700; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .fact dd small { font-size: .78rem; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+
+  /* ---------- sections ---------- */
+  section { padding: 2.5rem 0; scroll-margin-top: 4.2rem; }
+  h2 {
+    font-size: 1.6rem; font-weight: 700; letter-spacing: -.022em;
+    margin: 0 0 .35rem; text-wrap: balance;
+  }
+  .section-note {
+    font-family: "Newsreader", Georgia, serif; color: var(--ink-2);
+    max-width: 42rem; margin: 0 0 1.6rem; font-size: 1.03rem;
+  }
+
+  /* ---------- analysis ---------- */
+  .prose { font-family: "Newsreader", Georgia, serif; font-size: 1.06rem; line-height: 1.68; max-width: 40rem; }
+  .prose p { margin: 0 0 1rem; }
+  .prose strong { font-weight: 600; }
+
+  .findings { display: grid; gap: .8rem; margin: 1.5rem 0 0; max-width: 46rem; }
+  .finding {
+    display: grid; grid-template-columns: 1.7rem 1fr; gap: .1rem .85rem;
+    padding: .95rem 1.1rem; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 8px;
+  }
+  .finding-n {
+    grid-row: span 2; font-weight: 700; font-size: 1.05rem; color: var(--d4);
+    font-variant-numeric: tabular-nums; line-height: 1.5;
+  }
+  .finding-h { font-weight: 600; font-size: .98rem; letter-spacing: -.01em; }
+  .finding-b { font-family: "Newsreader", Georgia, serif; color: var(--ink-2); font-size: 1rem; line-height: 1.55; }
+
+  .swap { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin-top: 1.5rem; }
+  .swap > div { background: var(--surface); padding: 1.1rem 1.2rem; }
+  .swap h3 {
+    font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    margin: 0 0 .75rem; color: var(--ink-3);
+  }
+  .swap ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+  .swap li { font-size: .93rem; line-height: 1.4; padding-left: 1.15rem; position: relative; color: var(--ink-2); }
+  .swap li::before {
+    position: absolute; left: 0; top: 0; font-weight: 700; font-size: .95rem;
+  }
+  .swap .out li::before { content: "−"; color: var(--d4); }
+  .swap .in li::before { content: "+"; color: var(--d2); }
+  @media (max-width: 620px) { .swap { grid-template-columns: 1fr; } }
+
+  /* ---------- day ---------- */
+  .day { margin-bottom: 2rem; }
+  .day-head { display: flex; align-items: flex-start; gap: .85rem; margin-bottom: .9rem; }
+  .day-head .bullet { width: 2.4rem; height: 2.4rem; font-size: 1.1rem; margin-top: .1rem; }
+  .day-title { flex: 1; min-width: 0; }
+  .day-title h3 { margin: 0; font-size: 1.32rem; font-weight: 700; letter-spacing: -.022em; text-wrap: balance; }
+  .day-meta { font-size: .82rem; color: var(--ink-3); margin-top: .15rem; }
+  .day-meta b { font-weight: 600; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+  .sched {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-left: 4px solid var(--line); border-radius: 8px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .row {
+    display: grid; grid-template-columns: 1.4rem 3.6rem 1fr auto;
+    gap: .15rem .9rem; align-items: baseline;
+    padding: .8rem 1.1rem; border-top: 1px solid var(--rule);
+  }
+  .row:first-child { border-top: 0; }
+  .row.done .what, .row.done .time, .row.done .price { opacity: .42; }
+  .row.done .what b { text-decoration: line-through; }
+
+  .tick {
+    appearance: none; -webkit-appearance: none; margin: 0; cursor: pointer;
+    width: 1.05rem; height: 1.05rem; flex: none; align-self: center;
+    border: 1.5px solid var(--rule-strong); border-radius: 4px; background: transparent;
+    display: grid; place-content: center; transition: background .12s ease, border-color .12s ease;
+  }
+  .tick:hover { border-color: var(--line); }
+  .tick:checked { background: var(--line); border-color: var(--line); }
+  .tick:checked::after {
+    content: ""; width: .3rem; height: .55rem; margin-top: -.1rem;
+    border: solid var(--tick-ink); border-width: 0 2px 2px 0; transform: rotate(43deg);
+  }
+
+  .time {
+    font-size: .82rem; font-weight: 600; color: var(--ink-3);
+    font-variant-numeric: tabular-nums; letter-spacing: .01em; white-space: nowrap;
+  }
+  .what { min-width: 0; }
+  .what b { font-weight: 600; font-size: .98rem; letter-spacing: -.008em; }
+  .what span {
+    display: block; font-family: "Newsreader", Georgia, serif;
+    font-size: .97rem; line-height: 1.45; color: var(--ink-2); margin-top: .1rem;
+  }
+  .price {
+    font-size: .92rem; font-weight: 600; font-variant-numeric: tabular-nums;
+    white-space: nowrap; text-align: right;
+  }
+  .price.gratis {
+    font-size: .7rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--free); background: var(--free-bg); padding: .16rem .45rem; border-radius: 4px;
+  }
+  .row-total {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding: .8rem 1.1rem; border-top: 1px solid var(--rule-strong); background: var(--surface-2);
+  }
+  .row-total span {
+    font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .row-total b { font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 640px) {
+    .row { grid-template-columns: 1.4rem 1fr; row-gap: .2rem; }
+    .row .time { grid-column: 2; }
+    .row .what { grid-column: 2; }
+    .row .price { grid-column: 2; text-align: left; justify-self: start; margin-top: .15rem; }
+  }
+
+  /* ---------- budget ---------- */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 30rem; }
+  caption { text-align: left; padding: .9rem 1.1rem .4rem; font-size: .68rem;
+    font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  th, td { padding: .7rem 1.1rem; text-align: left; border-top: 1px solid var(--rule); font-size: .95rem; }
+  thead th {
+    font-size: .68rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-3); border-top: 0;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.num { font-weight: 600; }
+  tbody tr:nth-child(odd) td { background: var(--surface-2); }
+  tfoot td {
+    border-top: 2px solid var(--rule-strong); font-weight: 700; font-size: 1.02rem;
+    background: var(--surface);
+  }
+  .dot { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; margin-right: .5rem; vertical-align: baseline; }
+
+  .callouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+  .callout { border: 1px solid var(--rule); border-radius: 8px; padding: 1.05rem 1.15rem; background: var(--surface); }
+  .callout h3 { margin: 0 0 .5rem; font-size: .95rem; font-weight: 600; letter-spacing: -.01em; }
+  .callout p { margin: 0; font-family: "Newsreader", Georgia, serif; font-size: .97rem; line-height: 1.5; color: var(--ink-2); }
+  .callout .amt { font-family: "Archivo", sans-serif; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); }
+
+  footer {
+    border-top: 1px solid var(--rule); margin-top: 1.5rem; padding: 2rem 0 3.5rem;
+  }
+  footer p {
+    font-family: "Newsreader", Georgia, serif; font-size: .95rem; line-height: 1.6;
+    color: var(--ink-3); max-width: 42rem; margin: 0 0 .7rem;
+  }
+  footer .src { font-family: "Archivo", sans-serif; font-size: .8rem; color: var(--ink-3); }
+  footer a { color: var(--link); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+  html { scroll-behavior: smooth; }
+</style>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-label">Dia</span>
+    <a class="bullet b1" href="#dia1" aria-label="Dia 1 — Midtown, mirantes e Broadway">1</a>
+    <a class="bullet b2" href="#dia2" aria-label="Dia 2 — Estátua da Liberdade, 9/11 e Brooklyn Bridge">2</a>
+    <a class="bullet b3" href="#dia3" aria-label="Dia 3 — Central Park e Uptown">3</a>
+    <a class="bullet b4" href="#dia4" aria-label="Dia 4 — High Line, Village e SoHo">4</a>
+    <span class="nav-sep"></span>
+    <a class="nav-link" href="#analise">Análise do original</a>
+    <a class="nav-link" href="#orcamento">Orçamento</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Roteiro · Setembro de 2026</p>
+    <h1>Nova York para dois</h1>
+    <p class="standfirst">
+      Quatro dias montados a partir do carrossel de dicas da <b>@gab.ortizdaily</b> — mantendo
+      o que presta, cortando o publieditorial e tapando o buraco que ela deixou. Preços para
+      duas pessoas, em dólar.
+    </p>
+    <dl class="facts">
+      <div class="fact"><dt>Duração</dt><dd>4 dias</dd></div>
+      <div class="fact"><dt>Pessoas</dt><dd>2</dd></div>
+      <div class="fact"><dt>Museus</dt><dd>1</dd></div>
+      <div class="fact"><dt>Total estimado</dt><dd>$1.693<small> – $1.943</small></dd></div>
+    </dl>
+  </header>
+
+  <!-- ===================== ANÁLISE ===================== -->
+  <section id="analise">
+    <h2>O que o roteiro original acerta e onde ele falha</h2>
+    <p class="section-note">
+      Doze slides, uma semana na cidade, público de primeira viagem. A base é boa — e tem três furos.
+    </p>
+
+    <div class="prose">
+      <p>
+        <strong>O que presta:</strong> bagel no café da manhã, um show da Broadway, Times Square
+        à noite, Shake Shack e o passeio completo da Estátua da Liberdade. São escolhas certas
+        e ela está certa em priorizá-las.
+      </p>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <div class="finding-n">1</div>
+        <div class="finding-h">O slide do transfer é publicidade</div>
+        <div class="finding-b">
+          Ela marca <b>@strtransfer</b>, escreve “deixei o @ na legenda” e a legenda diz que
+          contratar a empresa “foi essencial”. Não é recomendação isenta. Transfer é confortável
+          de verdade, mas o táxi de tarifa fixa do JFK faz o mesmo trajeto por preço parecido,
+          sem intermediário.
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-n">2</div>
+        <div class="finding-h">“Central Park em 2 horas” está errado</div>
+        <div class="finding-b">
+          Os próprios seguidores dela reclamaram nos comentários. O parque tem quatro
+          quilômetros de extensão — duas horas dá pra ver a ponta sul e mais nada.
+          Aqui ele ocupa meio dia.
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-n">3</div>
+        <div class="finding-h">Uma semana inteira e nenhum mirante</div>
+        <div class="finding-b">
+          Nem Empire State, nem SUMMIT, nem Top of the Rock. É a maior falha da lista, e um
+          comentário aponta exatamente isso. Este roteiro coloca dois — e eles se complementam:
+          de um você fotografa o outro.
+        </div>
+      </div>
+    </div>
+
+    <div class="swap">
+      <div class="out">
+        <h3>Cortado do original</h3>
+        <ul>
+          <li>Zoológico do Central Park — pequeno e caro pro que entrega</li>
+          <li>The Friends Experience — cenário fotográfico, $100 o casal</li>
+          <li>O segundo show da Broadway — em 4 dias, um basta</li>
+          <li>Transfer contratado — o táxi de tarifa fixa resolve</li>
+        </ul>
+      </div>
+      <div class="in">
+        <h3>Acrescentado</h3>
+        <ul>
+          <li>Empire State e SUMMIT One Vanderbilt</li>
+          <li>Ponte do Brooklyn a pé até o DUMBO</li>
+          <li>Memorial e Museu do 11 de Setembro</li>
+          <li>High Line, Chelsea Market e Greenwich Village</li>
+          <li>Staten Island Ferry e Roosevelt Island Tramway — ambos de graça</li>
+          <li>Grand Central e a New York Public Library</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DIAS ===================== -->
+  <section id="dias">
+    <h2>Os quatro dias</h2>
+    <p class="section-note">
+      Cada dia segue uma linha real do metrô — a que de fato serve aquela região. Marque o que
+      já fez; a página lembra no seu aparelho.
+    </p>
+
+    <!-- DIA 1 -->
+    <div class="day" id="dia1" style="--line: var(--d1); --tick-ink: var(--d1-ink);">
+      <div class="day-head">
+        <span class="bullet b1" aria-hidden="true">1</span>
+        <div class="day-title">
+          <h3>Midtown, mirantes e Broadway</h3>
+          <div class="day-meta">Linha N·Q·R·W, sob a Broadway · tudo a pé num raio de 15 quarteirões · <b>$573 – $693</b></div>
+        </div>
+      </div>
+      <div class="sched">
+        <div class="row"><input class="tick" type="checkbox" id="t1a" aria-label="Marcar: café da manhã com bagel"><span class="time">09:00</span><div class="what"><b>Café da manhã com bagel</b><span>Bagel Market ou Junior's. Ela comeu bagel todos os dias e estava certa — enche demais.</span></div><span class="price">$35</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1b" aria-label="Marcar: Empire State Building"><span class="time">10:00</span><div class="what"><b>Empire State Building</b><span>Museu do prédio no 2º andar e o 86º ao ar livre, sem vidro. O único mirante do qual você não vê o Empire State.</span></div><span class="price">$98</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1c" aria-label="Marcar: almoço no Shake Shack"><span class="time">12:00</span><div class="what"><b>Almoço no Shake Shack</b><span>A unidade de Times Square. Dica dela, e é boa.</span></div><span class="price">$40</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1d" aria-label="Marcar: 5ª Avenida a pé"><span class="time">13:30</span><div class="what"><b>5ª Avenida a pé</b><span>St. Patrick's, Rockefeller Center, New York Public Library, Bryant Park e Grand Central.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1e" aria-label="Marcar: SUMMIT One Vanderbilt"><span class="time">17:00</span><div class="what"><b>SUMMIT One Vanderbilt</b><span>Colado na Grand Central. Agende pra pegar o pôr do sol — vidro, espelho e a melhor vista da cidade hoje.</span></div><span class="price">$110</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1f" aria-label="Marcar: jantar antes do teatro"><span class="time">19:30</span><div class="what"><b>Jantar rápido antes do teatro</b><span>Qualquer coisa no Theater District. Não invente — o show não espera.</span></div><span class="price">$50</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1g" aria-label="Marcar: Broadway, The Lion King"><span class="time">20:00</span><div class="what"><b>Broadway: The Lion King</b><span>Minskoff Theatre. Mezanino resolve. Ela viu Aladdin e O Rei Leão — em 4 dias, escolha um.</span></div><span class="price">$240 – 360</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t1h" aria-label="Marcar: Times Square à noite"><span class="time">22:30</span><div class="what"><b>Times Square à noite</b><span>O teatro fica dentro dela — você sai do show direto na praça iluminada. Sai de graça e é o melhor momento do dia.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row-total"><span>Total do dia</span><b>$573 – $693</b></div>
+      </div>
+    </div>
+
+    <!-- DIA 2 -->
+    <div class="day" id="dia2" style="--line: var(--d2); --tick-ink: var(--d2-ink);">
+      <div class="day-head">
+        <span class="bullet b2" aria-hidden="true">2</span>
+        <div class="day-title">
+          <h3>Estátua da Liberdade, 11 de Setembro e Brooklyn Bridge</h3>
+          <div class="day-meta">Linha 4·5·6, da Lexington até Bowling Green · o dia mais longo · <b>$302 – $312</b></div>
+        </div>
+      </div>
+      <div class="sched">
+        <div class="row"><input class="tick" type="checkbox" id="t2a" aria-label="Marcar: café rápido"><span class="time">07:30</span><div class="what"><b>Café rápido perto do hotel</b><span>Hoje é dia de sair cedo. A fila da balsa começa antes das oito.</span></div><span class="price">$30</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2b" aria-label="Marcar: Statue City Cruises"><span class="time">08:30</span><div class="what"><b>Statue City Cruises — passeio completo</b><span>Saída de Battery Park, com acesso ao pedestal e parada em Ellis Island. É a dica principal dela e vale mesmo: tem museu, parque e restaurante na ilha. Compre com antecedência.</span></div><span class="price">$60 – 70</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2c" aria-label="Marcar: almoço no Financial District"><span class="time">13:00</span><div class="what"><b>Almoço no Financial District</b><span>Volta da balsa por volta das 13h.</span></div><span class="price">$50</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2d" aria-label="Marcar: Memorial do 11 de Setembro"><span class="time">14:30</span><div class="what"><b>Memorial do 11 de Setembro</b><span>As duas fontes nas pegadas das torres. Aberto, ao ar livre.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2e" aria-label="Marcar: Museu do 11 de Setembro"><span class="time">15:00</span><div class="what"><b>Museu do 11 de Setembro</b><span>O único museu do roteiro. Escolhido porque é o único que não existe em outro lugar do mundo — Met e MoMA têm equivalente em Paris e Londres. Leva 2h e é pesado.</span></div><span class="price">$72</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2f" aria-label="Marcar: Oculus, Wall Street e Charging Bull"><span class="time">16:30</span><div class="what"><b>Oculus, Wall Street e o Charging Bull</b><span>Tudo num quarteirão do museu.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2g" aria-label="Marcar: Ponte do Brooklyn a pé"><span class="time">17:30</span><div class="what"><b>Ponte do Brooklyn a pé</b><span>Atravessar rumo ao DUMBO no fim de tarde. Sugestão que veio dos comentários do post — e é das melhores.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t2h" aria-label="Marcar: jantar no DUMBO"><span class="time">19:30</span><div class="what"><b>Jantar no DUMBO</b><span>Com o skyline de Manhattan inteiro na frente. À noite é mais deserto por ali — vão juntos.</span></div><span class="price">$90</span></div>
+        <div class="row-total"><span>Total do dia</span><b>$302 – $312</b></div>
+      </div>
+    </div>
+
+    <!-- DIA 3 -->
+    <div class="day" id="dia3" style="--line: var(--d3); --tick-ink: var(--d3-ink);">
+      <div class="day-head">
+        <span class="bullet b3" aria-hidden="true">3</span>
+        <div class="day-title">
+          <h3>Central Park e Uptown</h3>
+          <div class="day-meta">Linha A·C·E, subindo a Central Park West · o dia leve, no meio da viagem · <b>$345 – $465</b></div>
+        </div>
+      </div>
+      <div class="sched">
+        <div class="row"><input class="tick" type="checkbox" id="t3a" aria-label="Marcar: café com bagel"><span class="time">08:30</span><div class="what"><b>Café com bagel</b><span>Antes de entrar no parque.</span></div><span class="price">$35</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t3b" aria-label="Marcar: bike no Central Park"><span class="time">09:30</span><div class="what"><b>Bike no Central Park</b><span>Bethesda Terrace, The Mall, Bow Bridge e o Reservoir. Meio dia, não duas horas — o parque tem 4 km.</span></div><span class="price">$50 – 70</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t3c" aria-label="Marcar: almoço no Upper West Side"><span class="time">13:00</span><div class="what"><b>Almoço no Upper West Side</b><span>Saindo pela borda oeste do parque.</span></div><span class="price">$60</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t3d" aria-label="Marcar: Roosevelt Island Tramway"><span class="time">15:00</span><div class="what"><b>Roosevelt Island Tramway</b><span>Teleférico sobre o East River, pago pelo próprio bilhete do metrô. Vista do skyline de um ângulo que quase ninguém fotografa. Veio dos comentários do post.</span></div><span class="price gratis">No metrô</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t3e" aria-label="Marcar: Lincoln Center e Upper West"><span class="time">17:00</span><div class="what"><b>Lincoln Center e Upper West a pé</b><span>Fim de tarde sem pressa.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t3f" aria-label="Marcar: jantar bom"><span class="time">20:00</span><div class="what"><b>Jantar bom — a noite de vocês dois</b><span>Gramercy Tavern, Balthazar ou Keens. Reserve com antecedência; muda a viagem.</span></div><span class="price">$200 – 300</span></div>
+        <div class="row-total"><span>Total do dia</span><b>$345 – $465</b></div>
+      </div>
+    </div>
+
+    <!-- DIA 4 -->
+    <div class="day" id="dia4" style="--line: var(--d4); --tick-ink: var(--d4-ink);">
+      <div class="day-head">
+        <span class="bullet b4" aria-hidden="true">4</span>
+        <div class="day-title">
+          <h3>High Line, Village e SoHo</h3>
+          <div class="day-meta">Linha 1·2·3, descendo a 7ª Avenida · dia quase todo de graça · <b>$215</b></div>
+        </div>
+      </div>
+      <div class="sched">
+        <div class="row"><input class="tick" type="checkbox" id="t4a" aria-label="Marcar: café da manhã"><span class="time">09:00</span><div class="what"><b>Café da manhã</b><span>O último bagel.</span></div><span class="price">$35</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4b" aria-label="Marcar: Hudson Yards e o Vessel"><span class="time">10:00</span><div class="what"><b>Hudson Yards e o Vessel</b><span>Começo da High Line fica aqui.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4c" aria-label="Marcar: High Line a pé"><span class="time">10:30</span><div class="what"><b>High Line a pé, de ponta a ponta</b><span>Parque suspenso sobre uma linha de trem desativada. Meia hora sem parar, o dobro parando.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4d" aria-label="Marcar: almoço no Chelsea Market"><span class="time">12:00</span><div class="what"><b>Almoço no Chelsea Market</b><span>A High Line passa por cima dele.</span></div><span class="price">$60</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4e" aria-label="Marcar: Washington Square e Greenwich Village"><span class="time">14:00</span><div class="what"><b>Washington Square e Greenwich Village</b><span>O pedaço mais bonito e menos vertical de Manhattan.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4f" aria-label="Marcar: SoHo"><span class="time">15:30</span><div class="what"><b>SoHo</b><span>Compras e as fachadas de ferro fundido.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4g" aria-label="Marcar: Staten Island Ferry"><span class="time">17:30</span><div class="what"><b>Staten Island Ferry</b><span>Sai de Whitehall Terminal, passa pela Estátua da Liberdade e volta. De graça, sempre foi. Fecha a viagem no mesmo lugar onde ela começou.</span></div><span class="price gratis">Grátis</span></div>
+        <div class="row"><input class="tick" type="checkbox" id="t4h" aria-label="Marcar: jantar de despedida"><span class="time">20:00</span><div class="what"><b>Jantar de despedida</b><span>Onde vocês tiverem gostado mais.</span></div><span class="price">$120</span></div>
+        <div class="row-total"><span>Total do dia</span><b>$215</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ORÇAMENTO ===================== -->
+  <section id="orcamento">
+    <h2>Orçamento</h2>
+    <p class="section-note">Duas pessoas, quatro dias. Hospedagem e passagem aérea fora.</p>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Por dia</caption>
+        <thead>
+          <tr><th scope="col">Dia</th><th scope="col">Programa</th><th scope="col" class="num">Custo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="dot" style="background: var(--d1);"></span>1</td><td>Midtown, mirantes e Broadway</td><td class="num">$573 – 693</td></tr>
+          <tr><td><span class="dot" style="background: var(--d2);"></span>2</td><td>Estátua, 11 de Setembro e Brooklyn Bridge</td><td class="num">$302 – 312</td></tr>
+          <tr><td><span class="dot" style="background: var(--d3);"></span>3</td><td>Central Park e Uptown</td><td class="num">$345 – 465</td></tr>
+          <tr><td><span class="dot" style="background: var(--d4);"></span>4</td><td>High Line, Village e SoHo</td><td class="num">$215</td></tr>
+          <tr><td></td><td>Metrô — OMNY, teto de $34 por pessoa</td><td class="num">$68</td></tr>
+          <tr><td></td><td>JFK ida e volta — táxi de tarifa fixa</td><td class="num">$190</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">Total estimado</td><td class="num">$1.693 – $1.943</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="table-scroll" style="margin-top: 1.2rem;">
+      <table>
+        <caption>Por categoria</caption>
+        <thead>
+          <tr><th scope="col">Categoria</th><th scope="col">Detalhe</th><th scope="col" class="num">Custo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mirantes</td><td>Empire State + SUMMIT One Vanderbilt</td><td class="num">$208</td></tr>
+          <tr><td>Broadway</td><td>Um show, mezanino</td><td class="num">$240 – 360</td></tr>
+          <tr><td>Estátua da Liberdade</td><td>Passeio completo, com pedestal e Ellis Island</td><td class="num">$60 – 70</td></tr>
+          <tr><td>Museu</td><td>11 de Setembro</td><td class="num">$72</td></tr>
+          <tr><td>Bike</td><td>Central Park, meio período</td><td class="num">$50 – 70</td></tr>
+          <tr><td>Alimentação</td><td>Café, almoço e jantar × 4 dias</td><td class="num">$805 – 905</td></tr>
+          <tr><td>Transporte</td><td>Metrô + JFK ida e volta</td><td class="num">$258</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">Total estimado</td><td class="num">$1.693 – $1.943</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="callouts">
+      <div class="callout">
+        <h3>Hospedagem, fora da conta</h3>
+        <p>Quatro noites em Midtown, hotel 3 ou 4 estrelas: some <span class="amt">$1.200 – $2.400</span>.</p>
+      </div>
+      <div class="callout">
+        <h3>O CityPASS não compensa</h3>
+        <p>Com um museu só, vocês usariam três das cinco atrações do pacote. Avulso sai por volta de <span class="amt">$125</span> por pessoa contra <span class="amt">$146</span> do passe. Comprem tudo separado.</p>
+      </div>
+      <div class="callout">
+        <h3>Se quiserem incluir o que cortei</h3>
+        <p>Zoológico do Central Park <span class="amt">$40</span> · The Friends Experience <span class="amt">$100</span> · Intrepid, o porta-aviões sugerido nos comentários <span class="amt">$72</span>.</p>
+      </div>
+      <div class="callout">
+        <h3>Época importa</h3>
+        <p>Alta estação — dezembro e de junho a agosto — sobe hotel e Broadway em 30 a 50%. Setembro-outubro e abril-maio são o melhor custo-benefício.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Todos os preços são <b>estimativas para 2026</b> e devem ser confirmados nos sites oficiais
+      antes da compra. Broadway é o item que mais varia: o mesmo assento pode dobrar de preço
+      entre uma terça e um sábado.
+    </p>
+    <p class="src">
+      Roteiro original: carrossel de 12 slides de <b>@gab.ortizdaily</b>, publicado em 25 de agosto de 2026.
+      Sugestões dos comentários incorporadas: Ponte do Brooklyn e DUMBO, Staten Island Ferry,
+      Roosevelt Island Tramway, SUMMIT e Grand Central.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var KEY = 'ny4d.done.v1';
+    var state = {};
+    try {
+      state = JSON.parse(localStorage.getItem(KEY) || '{}') || {};
+    } catch (e) {
+      state = {};
+    }
+
+    var ticks = document.querySelectorAll('.tick');
+    Array.prototype.forEach.call(ticks, function (box) {
+      var row = box.closest('.row');
+      if (state[box.id]) {
+        box.checked = true;
+        row.classList.add('done');
+      }
+      box.addEventListener('change', function () {
+        row.classList.toggle('done', box.checked);
+        state[box.id] = box.checked;
+        try {
+          localStorage.setItem(KEY, JSON.stringify(state));
+        } catch (e) {
+          /* modo privado ou site data bloqueado: a marcação vale só nesta sessão */
+        }
+      });
+    });
+  })();
+</script>
